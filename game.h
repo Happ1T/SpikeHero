@@ -132,7 +132,7 @@ bool game(RenderWindow &window, bool &is_continue) {
             if (((*it)->getRect(false, 0).intersects(player.getRect(false, 0)))) {
                 if ((*it)->name == "skeleton") {
                     player.speed = SPEED_ADVENTURER / 2;
-                    //player.speed_animation = SPEED_ANIMATION / 4;
+                    player.speed_animation = SPEED_ANIMATION / 4;
                     player.on_mob = true;
                 }
             }
