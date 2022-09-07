@@ -12,6 +12,6 @@ int main() {
        game(window, is_continue);
    }
    //Fill gay fuuuul gay
-   // pidr
+   // pidr 823yfhcewhcih2ehc
     return 0;
 }
