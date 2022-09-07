@@ -13,5 +13,6 @@ int main() {
    }
    //Fill gay fuuuul gay
    // pidr 823yfhcewhcih2ehc
+   exit(0);
     return 0;
 }
