@@ -9,7 +9,7 @@ int main() {
     RenderWindow window(VideoMode(WIDTH_SCREEN, HEIGHT_SCREEN), "Fil gay", Style::Close);
    while(window.isOpen()) {
        menu(window, is_continue);
-       game(window, is_continue);
+       game(window, is_continue)
    }
    //zalupa
     return 0;
