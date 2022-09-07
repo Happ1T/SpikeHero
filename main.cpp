@@ -11,8 +11,5 @@ int main() {
        menu(window, is_continue);
        game(window, is_continue);
    }
-   //Fill gay fuuuul gay
-   // pidr 823yfhcewhcih2ehc
-   exit(0);
     return 0;
 }
