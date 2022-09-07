@@ -11,5 +11,6 @@ int main() {
        menu(window, is_continue);
        game(window, is_continue);
    }
+   //zalupa
     return 0;
 }
