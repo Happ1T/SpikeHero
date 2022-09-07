@@ -3,7 +3,7 @@
 //
 
 #ifndef TEST1_OPTIONS_H
-#define TEST1_OPTIONS_H
+#define TEST1_OPTIONS_Hhhh
 #include "hero.h"
 #include "consts.h"
 #include "view.h"
@@ -107,7 +107,7 @@ void options(RenderWindow &window,Sprite &background) {
                 }
                 WIDTH_CAMERA = WIDTH_SCREEN / 4;
                 HEIGHT_CAMERA = HEIGHT_SCREEN / 4;
-                three_four = (WIDTH_CAMERA / (SIZE_OF_BLOCK * 4));
+                one_four = (WIDTH_CAMERA / (SIZE_OF_BLOCK * 4));
                 window.create(VideoMode(WIDTH_SCREEN, HEIGHT_SCREEN), "Fil gay", Style::Close);
             }
 
