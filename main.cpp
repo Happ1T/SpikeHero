@@ -11,5 +11,6 @@ int main() {
        menu(window, is_continue);
        game(window, is_continue);
    }
+   //Fill gay
     return 0;
 }
