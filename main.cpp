@@ -11,6 +11,7 @@ int main() {
        menu(window, is_continue);
        game(window, is_continue);
    }
-   //zalupa
+   //Fill gay fuuuul gay
+   // pidr
     return 0;
 }
