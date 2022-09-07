@@ -17,11 +17,10 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
     BackToMenu.loadFromFile("game/texture/pause menu/back_to_menu_button.png");
     BackGround.loadFromFile("game/texture/pause menu/BackGround.png");
     Continue.loadFromFile("game/texture/pause menu/continue_button.png");
-    Coop.loadFromFile("game/texture/pause menu/Coop_button.png");
-    Sprite BackToMenuS(BackToMenu),BackGroundS(BackGround),ContinueS(Continue),CoopS(Coop);
-    float razn=WIDTH_CAMERA/DEFAULT_WIDTH_SCREEN;
-    float razn_s = WIDTH_SCREEN/DEFAULT_WIDTH_SCREEN;
-
+    Sprite BackToMenuS(BackToMenu),BackGroundS(BackGround),ContinueS(Continue);
+    float razn   = WIDTH_CAMERA/DEFAULT_WIDTH_SCREEN;
+    float razn_W = WIDTH_SCREEN/DEFAULT_WIDTH_SCREEN;
+    float razn_H = HEIGHT_SCREEN/DEFAULT_HEIGHT_SCREEN;
     float tempX = x;
     if (x < LEFT_LINE)
         tempX = LEFT_LINE;
@@ -34,9 +33,9 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
     float but2x = tempX + (three_four * SIZE_OF_BLOCK * razn),       but2y = y - 100*razn;
     float but3x = tempX + (three_four * SIZE_OF_BLOCK * razn),       but3y = y + 150*razn;
 
-    ContinueS.setPosition(but1x , but1y);
-    CoopS.setPosition( but2x, but2y);
-    BackToMenuS.setPosition(but3x ,but3y );
+    ContinueS.setPosition(butx , but1y);
+
+    BackToMenuS.setPosition(butx ,but3y );
 
 
     BackToMenuS.setScale(Vector2f(razn,razn));
@@ -61,7 +60,7 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
         }
 
     }
-    switch(ButtonNum1) {
+   /* switch(ButtonNum1) {
         case 1:{
             ContinueS.setTextureRect(IntRect(0, 171, 680, 170));
         }  break;
