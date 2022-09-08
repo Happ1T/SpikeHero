@@ -15,6 +15,7 @@ bool check_load=false;
 Texture newGameButton,continueButton, coopButton, optionsButton, menuBackground,exitButton;
 Sprite newGameS,continueS, coopS, optionsS, exitS, menuBgS;
 void menu(RenderWindow &window, bool &is_continue ){
+    sleep(milliseconds(300));
     Event event;
     float emptity = 0;
     int empt = 0;

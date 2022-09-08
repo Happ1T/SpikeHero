@@ -139,5 +139,6 @@ void options(RenderWindow &window,Sprite &background) {
         sleep(milliseconds(50));
 
     }
+    sleep(milliseconds(300));
 }
 #endif //TEST1_OPTIONS_H

@@ -204,7 +204,6 @@ bool game(RenderWindow &window, bool &is_continue) {
     window.clear(Color(77, 83, 140));
     window.draw(locStart);
     window.draw(player.sprite);
-
     for (it = enemyList.begin(); it != enemyList.end(); it++) {
         window.draw((*it)->sprite);
     }

@@ -30,7 +30,7 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
     BackGroundS.setPosition(0, 0);
 
     float butx = tempX + WIDTH_CAMERA/4  - 340 * razn;
-    float but1y = y - WIDTH_CAMERA/2 + WIDTH_CAMERA/4 , but2y = y - WIDTH_CAMERA/5 * 2, but3y = y + WIDTH_CAMERA/5;
+    float but1y = (y - HEIGHT_CAMERA/2 + HEIGHT_CAMERA/6 * 1) + 30 * 0 *razn, but2y = y - HEIGHT_CAMERA/5 * 2, but3y = (y - HEIGHT_CAMERA/2 + HEIGHT_CAMERA/6 * 3) + 30 * 2 * razn;
 
 
     ContinueS.setPosition(butx , but1y);
@@ -60,22 +60,18 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
         }
 
     }
-   /* switch(ButtonNum1) {
-        case 1:{
 
-        }  break;
-
-        case 3:{
-            BackToMenuS.setTextureRect(IntRect(0, 171, 680, 170));
-        }break;
-    }*/
-    if (IntRect((WIDTH_SCREEN/2 - 340) * razn, (HEIGHT_SCREEN/4) *razn  , 680 * razn_W, 170 * razn_H).contains(Mouse::getPosition(window))) {
+    if (IntRect(WIDTH_SCREEN/2 - 340*razn_W, (HEIGHT_SCREEN/6) + 30 * 1 *razn_H, 680 * razn_W, 170 * razn_H).contains(Mouse::getPosition(window))) {
         ButtonNum = 1;
         ContinueS.setTextureRect(IntRect(0, 171, 680, 170));
     }
+    if (IntRect(WIDTH_SCREEN/2 - 340*razn_W, (HEIGHT_SCREEN/6 * 3) + 30 * 2 *razn_H, 680 * razn_W, 170 * razn_H).contains(Mouse::getPosition(window))) {
+        ButtonNum = 3;
+        BackToMenuS.setTextureRect(IntRect(0, 171, 680, 170));
+    }
 
-    if (Keyboard::isKeyPressed(Keyboard::Enter)){
-        switch(ButtonNum1) {
+    if (Mouse::isButtonPressed(Mouse::Left)){
+        switch(ButtonNum) {
             case 1:{
                 isPause = false;
 
@@ -94,5 +90,6 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
     window.draw(BackGroundS);
     window.draw(BackToMenuS);
     window.draw(ContinueS);
+    sleep(milliseconds(50));
 }
 #endif //TEST1_PAUSE_MENU_H
