@@ -29,9 +29,9 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
 
     BackGroundS.setPosition(0, 0);
 
-    float but1x = tempX + (three_four * SIZE_OF_BLOCK * razn),       but1y = y - 350*razn;
-    float but2x = tempX + (three_four * SIZE_OF_BLOCK * razn),       but2y = y - 100*razn;
-    float but3x = tempX + (three_four * SIZE_OF_BLOCK * razn),       but3y = y + 150*razn;
+    float butx = tempX + WIDTH_CAMERA/4  - 340 * razn;
+    float but1y = y - WIDTH_CAMERA/2 + WIDTH_CAMERA/4 , but2y = y - WIDTH_CAMERA/5 * 2, but3y = y + WIDTH_CAMERA/5;
+
 
     ContinueS.setPosition(butx , but1y);
 
@@ -40,11 +40,11 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
 
     BackToMenuS.setScale(Vector2f(razn,razn));
     ContinueS.setScale(Vector2f(razn,razn));
-    CoopS.setScale(Vector2f(razn,razn));
+
 
     BackToMenuS.setTextureRect(IntRect(0, 0, 680, 170));
     ContinueS.setTextureRect(IntRect(0, 0, 680, 170));
-    CoopS.setTextureRect(IntRect(0, 0, 680, 170));
+
 
     timer_press += time;
     if (timer_press > 50) {
@@ -62,14 +62,16 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
     }
    /* switch(ButtonNum1) {
         case 1:{
-            ContinueS.setTextureRect(IntRect(0, 171, 680, 170));
+
         }  break;
-        case 2:{
-            CoopS.setTextureRect(IntRect(0, 171, 680, 170));
-        }  break;
+
         case 3:{
             BackToMenuS.setTextureRect(IntRect(0, 171, 680, 170));
         }break;
+    }*/
+    if (IntRect((WIDTH_SCREEN/2 - 340) * razn, (HEIGHT_SCREEN/4) *razn  , 680 * razn_W, 170 * razn_H).contains(Mouse::getPosition(window))) {
+        ButtonNum = 1;
+        ContinueS.setTextureRect(IntRect(0, 171, 680, 170));
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Enter)){
@@ -91,7 +93,6 @@ void pauseMenu(RenderWindow &window,float x,float y, float time, bool &isPause, 
 
     window.draw(BackGroundS);
     window.draw(BackToMenuS);
-    window.draw(CoopS);
     window.draw(ContinueS);
 }
 #endif //TEST1_PAUSE_MENU_H

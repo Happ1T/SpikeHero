@@ -93,8 +93,9 @@ bool game(RenderWindow &window, bool &is_continue) {
                 WIDTH_CAMERA *= 1.01;
                 HEIGHT_CAMERA *= 1.01;
             }
-            LEFT_LINE = (SIZE_OF_BLOCK) * ((WIDTH_CAMERA / (2 * SIZE_OF_BLOCK) - three_four + 1));
-            RIGHT_LINE = (WIDTH_MAP - ((WIDTH_CAMERA / (2 * SIZE_OF_BLOCK) + three_four + 1))) * SIZE_OF_BLOCK;
+            one_four=(WIDTH_CAMERA/4);
+            LEFT_LINE = one_four;
+            RIGHT_LINE = WIDTH_MAP*SIZE_OF_BLOCK - 3*one_four;
             view.reset(FloatRect(0, 0, WIDTH_CAMERA, HEIGHT_CAMERA));
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -218,7 +219,7 @@ bool game(RenderWindow &window, bool &is_continue) {
 
 
 
-    if  (ZOOM > (1)) {
+    if  (ZOOM > 1) {
         while(ZOOM!=1){
         ZOOM -= 1;
         WIDTH_CAMERA /= 1.01;
@@ -233,8 +234,6 @@ bool game(RenderWindow &window, bool &is_continue) {
         HEIGHT_CAMERA *= 1.01;
         }
     }
-    LEFT_LINE = (SIZE_OF_BLOCK) * ((WIDTH_CAMERA / (2 * SIZE_OF_BLOCK) - three_four + 1));
-    RIGHT_LINE = (WIDTH_MAP - ((WIDTH_CAMERA / (2 * SIZE_OF_BLOCK) + three_four + 1))) * SIZE_OF_BLOCK;
     view.reset(FloatRect(0, CENTER, WIDTH_CAMERA, HEIGHT_CAMERA));
     view.reset(FloatRect(0, 0, WIDTH_SCREEN, HEIGHT_SCREEN));
     SetPlayerCoordForView(0, 0, false);
