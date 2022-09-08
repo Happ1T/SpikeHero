@@ -74,7 +74,7 @@ bool game(RenderWindow &window, bool &is_continue) {
         Event event;
         timer_pause += time;
         ////////////////////////////////////////EXIT////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (Keyboard::isKeyPressed(sf::Keyboard::Escape) && timer_pause > 100) {
+        if (Keyboard::isKeyPressed(sf::Keyboard::Escape) && timer_pause > 130) {
             isPause = !isPause;
             timer_pause = 0;
             ButtonNum1 = 1;
@@ -93,110 +93,106 @@ bool game(RenderWindow &window, bool &is_continue) {
                 WIDTH_CAMERA *= 1.01;
                 HEIGHT_CAMERA *= 1.01;
             }
-            one_four=(WIDTH_CAMERA/4);
+            one_four = (WIDTH_CAMERA / 4);
             LEFT_LINE = one_four;
-            RIGHT_LINE = WIDTH_MAP*SIZE_OF_BLOCK - 3*one_four;
+            RIGHT_LINE = WIDTH_MAP * SIZE_OF_BLOCK - 3 * one_four;
             view.reset(FloatRect(0, 0, WIDTH_CAMERA, HEIGHT_CAMERA));
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             /////////////////////////////// UPDATES /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             player.update(time);
-        }
-        playerHPBar.update(player.health);
+
+            playerHPBar.update(player.health);
 
 
-        for (it = enemyList.begin(); it != enemyList.end();) {
-            Enemy *b = *it;
-            (*it)->update(time);
-            if ((*it)->life == false) {
-                it = enemyList.erase(it);
-                delete b;
-            } else { it++; }
+            for (it = enemyList.begin(); it != enemyList.end();) {
+                Enemy *b = *it;
+                (*it)->update(time);
+                if ((*it)->life == false) {
+                    it = enemyList.erase(it);
+                    delete b;
+                } else { it++; }
 
-        }
-        //////////////////////////////// INTERACTION /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        FloatRect GetRect;
-        FloatRect GetRectMob;
-        player.on_mob = false;
-        if (player.dir) {
-            GetRect = player.getRect(true, player.width_attack - player.width_simple);
-        } else { GetRect = player.getRect(true, 0); }
-        player.speed_animation = SPEED_ANIMATION;
-        for (it = enemyList.begin(); it != enemyList.end(); it++) {
-
-            if ((*it)->dir) { GetRectMob = (*it)->getRect(true, (*it)->width_attack - (*it)->width_simple); }
-            else { GetRectMob = (*it)->getRect(true, 0); }
-
-            if (((*it)->getRect(false, 0).intersects(player.getRect(false, 0)))) {
-                if ((*it)->name == "skeleton") {
-                    player.speed = SPEED_ADVENTURER / 2;
-                    //player.speed_animation = SPEED_ANIMATION / 4;
-                    player.on_mob = true;
-                }
             }
+            //////////////////////////////// INTERACTION /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            /////////////////////////////// ADVENTURER_ATTACK /////////////////////////////////////////////////////////////////////////////////////////////////////////
-            if (((*it)->getRect(false, 0).intersects(GetRect)) && (*it)->health > 0) {
-                if (player.timer_attack > TIME_ATTACK &&
-                    ((int(player.frame) >= 3 && int(player.frame) <= 5) && (player.is_attack))) {
-                    (*it)->is_damage = true;
-                    (*it)->health -= DAMAGE;
-                    (*it)->frame = 0;
-                    (*it)->speed_animation = SPEED_SKELETON_ANIMATION * 1.4;
-                    player.timer_attack = 0;
-                }
-            }
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            /////////////////////////////// MOB_ATTACK /////////////////////////////////////////////////////////////////////////////////////////////////////////
-            if ((player.getRect(false, 0).intersects(GetRectMob)) && !(*it)->is_damage) {
-                if ((*it)->timer_attack > TIME_ATTACK && (*it)->frame >= 5 && (*it)->frame <= 6 &&
-                    (*it)->is_attack &&
-                    player.health > 0) {
-                    player.is_damage = true;
-                    player.health -= 10;
-                    player.frame = 0;
-                    if (player.health > 0) {
-                        player.dy = -0.1;
-                        player.speed_animation = SPEED_ANIMATION * 2;
-                        if ((*it)->dir) { player.dx = -0.05; }
-                        else { player.dx = 0.05; }
-                    } else { (*it)->is_agr = false; }
-                    (*it)->timer_attack = 0;
-                }
-            }
-            if (!(*it)->is_attack && (*it)->health > 0 && player.health > 0) {
-                if ((abs((*it)->x - player.x) <= SIZE_OF_BLOCK) &&
-                    (abs((*it)->y - player.y) <= SIZE_OF_BLOCK * 2) && (*it)->is_agr) {
-                    (*it)->is_attack = true;
-                    (*it)->frame = 0;
-                    (*it)->dx = 0;
-                    (*it)->speed_animation = SPEED_SKELETON_ANIMATION / 1.3;
-                } else if (abs((*it)->x - player.x) < 8 * SIZE_OF_BLOCK &&
-                           (abs((*it)->y - player.y) < SIZE_OF_BLOCK * 5) && player.health > 0) {
-                    (*it)->is_agr = true;
-                    (*it)->speed = SPEED_SKELETON * 4;
-                    (*it)->speed_animation = SPEED_SKELETON_ANIMATION * 4;
-                    if (player.x - (*it)->x > 0) {
-                        (*it)->dir = false;
-                        (*it)->dx = (*it)->speed;
-                    } else {
-                        (*it)->dir = true;
-                        (*it)->dx = -(*it)->speed;
+            FloatRect GetRect;
+            FloatRect GetRectMob;
+            player.on_mob = false;
+            if (player.dir) {
+                GetRect = player.getRect(true, player.width_attack - player.width_simple);
+            } else { GetRect = player.getRect(true, 0); }
+            player.speed_animation = SPEED_ANIMATION;
+            for (it = enemyList.begin(); it != enemyList.end(); it++) {
+
+                if ((*it)->dir) { GetRectMob = (*it)->getRect(true, (*it)->width_attack - (*it)->width_simple); }
+                else { GetRectMob = (*it)->getRect(true, 0); }
+
+                if (((*it)->getRect(false, 0).intersects(player.getRect(false, 0)))) {
+                    if ((*it)->name == "skeleton") {
+                        player.speed = SPEED_ADVENTURER / 2;
+                        //player.speed_animation = SPEED_ANIMATION / 4;
+                        player.on_mob = true;
                     }
-                } else if (((abs((*it)->x - player.x) >= 8 * SIZE_OF_BLOCK ||
-                             (abs((*it)->y - player.y) >= SIZE_OF_BLOCK * 5)) && (*it)->is_agr) ||
-                           player.health <= 0) {
-                    (*it)->is_agr = false;
-                    (*it)->dx = SPEED_SKELETON;
-                    (*it)->speed_animation = SPEED_SKELETON_ANIMATION;
+                }
+
+                /////////////////////////////// ADVENTURER_ATTACK /////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if (((*it)->getRect(false, 0).intersects(GetRect)) && (*it)->health > 0) {
+                    if (player.timer_attack > TIME_ATTACK &&
+                        ((int(player.frame) >= 3 && int(player.frame) <= 5) && (player.is_attack))) {
+                        (*it)->is_damage = true;
+                        (*it)->health -= DAMAGE;
+                        (*it)->frame = 0;
+                        (*it)->speed_animation = SPEED_SKELETON_ANIMATION * 1.4;
+                        player.timer_attack = 0;
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                /////////////////////////////// MOB_ATTACK /////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ((player.getRect(false, 0).intersects(GetRectMob)) && !(*it)->is_damage) {
+                    if ((*it)->timer_attack > TIME_ATTACK && (*it)->frame >= 5 && (*it)->frame <= 6 &&
+                        (*it)->is_attack &&
+                        player.health > 0) {
+                        player.is_damage = true;
+                        player.health -= 10;
+                        player.frame = 0;
+                        if (player.health > 0) {
+                            player.dy = -0.1;
+                            player.speed_animation = SPEED_ANIMATION * 2;
+                            if ((*it)->dir) { player.dx = -0.05; }
+                            else { player.dx = 0.05; }
+                        } else { (*it)->is_agr = false; }
+                        (*it)->timer_attack = 0;
+                    }
+                }
+                if (!(*it)->is_attack && (*it)->health > 0 && player.health > 0) {
+                    if ((abs((*it)->x - player.x) <= SIZE_OF_BLOCK) && (abs((*it)->y - player.y) <= SIZE_OF_BLOCK * 2) && (*it)->is_agr) {
+                        (*it)->is_attack = true;
+                        (*it)->frame = 0;
+                        (*it)->dx = 0;
+                        (*it)->speed_animation = SPEED_SKELETON_ANIMATION / 1.3;
+                    } else if (abs((*it)->x - player.x) < 8 * SIZE_OF_BLOCK && (abs((*it)->y - player.y) < SIZE_OF_BLOCK * 5) && player.health > 0) {
+                        (*it)->is_agr = true;
+                        (*it)->speed = SPEED_SKELETON * 4;
+                        (*it)->speed_animation = SPEED_SKELETON_ANIMATION * 4;
+                        if (player.x - (*it)->x > 0) {
+                            (*it)->dir = false;
+                            (*it)->dx = (*it)->speed;
+                        } else {
+                            (*it)->dir = true;
+                            (*it)->dx = -(*it)->speed;
+                        }
+                    } else if ((abs((*it)->x - player.x) >= 8 * SIZE_OF_BLOCK || ((abs((*it)->y - player.y) >= SIZE_OF_BLOCK * 7) && player.is_ground) && (*it)->is_agr) || player.health <= 0) {
+                        (*it)->is_agr = false;
+                        (*it)->dx = SPEED_SKELETON;
+                        (*it)->speed_animation = SPEED_SKELETON_ANIMATION;
+                    }
                 }
             }
         }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

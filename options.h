@@ -3,7 +3,7 @@
 //
 
 #ifndef TEST1_OPTIONS_H
-#define TEST1_OPTIONS_Hhhh
+#define TEST1_OPTIONS_H
 #include "hero.h"
 #include "consts.h"
 #include "view.h"
